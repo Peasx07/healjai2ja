@@ -1,0 +1,193 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>healJAI</title>
+  <link rel="stylesheet" href="styles.css">
+  <style>
+    html {
+      scroll-behavior: smooth;
+    }
+  </style>
+</head>
+
+<body>
+  <section id="about">
+    <div class="aboutContainer">
+      <nav>
+        <img src="picture/HealJAI Logo-2.png" alt="" class="logo">
+        <ul class="nav-list">
+          <li><a href="#about">About</a></li>
+          <li><a href="#services">Services</a></li>
+          <li><a href="#LLMSection">Assistance</a></li>
+          <li><a href="#emergencySection">Emergency</a></li>
+          <li><button class="signupBtn">Sign up</button></li>
+          <li><button class="loginBtn">Log in</button></li>
+        </ul>
+      </nav>
+
+      <div class="landingLeft">
+        <div class="headText">
+          <h1>Let’s your heart <br> get healed by us </h1>
+        </div>
+        <div class="subText">
+          <p>A web application and intelligent assistant for</p>
+          <p>love counseling and relationship guidance</p>
+        </div>
+        <button class="startBtn">
+          <span>Get started</span>
+        </button>
+      </div>
+
+      <div class="landingRight">
+        <img src="picture/landingPic.png" alt="" class="landingPic">
+      </div>
+    </div>
+  </section>
+
+  <section id="services">
+    <div class="serviceContainer">
+      <button class="serviceTopic">Services</button> <br>
+      <div class="explaination">
+        <span class="highlightText">Heal your heart with guidance you can trust <br></span>
+        <span class="desc1">Our AI-powered web app gives personalized love and life <br> </span>
+        <span class="desc2">advice to help you prevent heartbreak and protect your well-being</span>
+      </div>
+      <div class="serviceCard">
+        <div class="supFr">
+          <img src="picture/service1.png" alt="">
+          <div class="supTopic">
+            <h1>A supportive friend <br></h1>
+            <h1>for your heart</h1>
+          </div>
+          <p>Listening to your story, understanding <br></p>
+          <p>your journey, and standing by your side <br></p>
+          <p>through life’s challenges</p>
+        </div>
+        <div class="guideHeart">
+          <img src="picture/service2.png" alt="">
+          <div class="guideTopic">
+            <h1>Guiding your heart <br></h1>
+            <h1>with care</h1>
+          </div>
+          <p>Supporting you in finding clarity in difficult  <br></p>
+          <p>relationships and showing the way that <br></p>
+          <p>fits you best</p>
+        </div>
+       <div class="emergency">
+        <img src="picture/service3.png" alt="">
+        <h1>Emergency Support<br></h1>
+        <div class="emergency-text">
+        <p>Experiencing emotional challenges?   <br></p>
+        <p>Reach out to the provided hotlines from  <br></p>
+        <p>professional organizations for immediate help</p>
+    </div>
+</div>
+
+      </div>
+    </div>
+  </section>
+
+  <section id="assistance">
+    <div class="nameContainer">
+      <div class="nameTopic">
+        <span>What would you like us <br></span>
+        <span>to call you?</span>
+      </div>
+      <p>Let us know the name you’d like to be called</p>
+      <input class="nameInput" type="text"> <br>
+      <button class="submitName">that's my name</button>
+    </div>
+  </section>
+
+  <section id="LLMSection">
+    <div class="LLMTopic">
+      <span>Greeting, username</span>
+      <p>Express your thoughts and feelings with us—we’re here to listen</p>
+    </div>
+    <div class="container">
+      <div class="headLLM">
+        <img src="picture/miniLogo.png" alt="">
+        <span>Express your feeling here</span>
+      </div>
+      <form id="console-form">
+        <textarea id="message" placeholder="tell us your story..." required></textarea>
+        <button type="submit" id="submit-btn">send</button>
+      </form>
+      <div id="response-area" style="display: none;"></div>
+    
+      </div>
+
+    <script>
+    // --- จุดที่แก้ไข: กำหนด IP ใหม่ให้กับ API ---
+    const API_BASE_URL = 'http://54.167.28.63:3001';
+
+    const form = document.getElementById('console-form');
+    const submitBtn = document.getElementById('submit-btn');
+    const responseArea = document.getElementById('response-area');
+
+    form.addEventListener('submit', async (event) => {
+        event.preventDefault();
+        
+        const nameInput = document.querySelector('.nameInput');
+        const name = nameInput && nameInput.value ? nameInput.value : "User";
+        const message = document.getElementById('message').value;
+
+        submitBtn.disabled = true;
+        submitBtn.innerText = 'sending...';
+        responseArea.style.display = 'block';
+        responseArea.innerText = 'waiting for a response...';
+
+        try {
+            // --- ใช้ตัวแปรที่สร้างขึ้นเพื่อเรียก API ---
+            const response = await fetch(`${API_BASE_URL}/api/console`, {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({ name, message }),
+            });
+
+            if (!response.ok) {
+                const errData = await response.json();
+                throw new Error(errData.error || 'Server responded with an error');
+            }
+
+            const data = await response.json();
+            responseArea.innerText = data.reply;
+            
+            form.reset();
+            
+        } catch (error) {
+            console.error('Error:', error);
+            responseArea.innerText = 'Sorry, an error occurred: ' + error.message;
+        } finally {
+            submitBtn.disabled = false;
+            submitBtn.innerText = 'send';
+        }
+    });
+</script>
+  </section>
+
+  <section id="emergencySection">
+    <div class="emergencyContainer">
+      <h1>Emergency Call</h1>
+      <hr>
+      <p>For immediate help in a critical situation, contact this hotline</p>
+      <div class="buttonGroup">
+        <button class="emoSup">
+          <img src="picture/phone.png" alt="">
+          Emotional Support Hotline
+        </button>
+        <button class="mentalSup">
+          <img src="picture/phone.png" alt="">
+          Mental Health Support Center
+        </button>
+        <button class="medicalEmer">
+          <img src="picture/phone.png" alt="">
+          Medical Emergency Hotline
+        </button>
+      </div>
+    </div>
+  </section>
+</body>
+</html>
