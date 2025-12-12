@@ -1,27 +1,19 @@
-# HealJAI
+# HealJAI (ฮีลใจ)
 
-HealJAI is a web application and intelligent assistant designed to provide love counseling and relationship guidance. It features "Puen-Jai" (Friend for the Heart), an empathic AI companion ready to listen to your story and provide comforting advice.
+HealJAI คือเว็บแอปพลิเคชันและผู้ช่วยอัจฉริยะที่ออกแบบมาเพื่อเป็นที่ปรึกษาด้านความรักและให้คำแนะนำในการดูแลความสัมพันธ์ โดยมีฟีเจอร์หลักคือ "เพื่อนใจ" (Puen-Jai) ซึ่งเป็น AI ที่มีความเห็นอกเห็นใจ พร้อมรับฟังเรื่องราวของคุณและให้คำปรึกษาที่อบอุ่นและเข้าใจ
 
-## Features
+## คุณสมบัติหลัก
 
-* **AI Companionship:** Chat with "Puen-Jai," an AI powered by Google Gemini, designed to be warm, wise, and non-judgmental.
-* **Multilingual Support:** The AI automatically detects and responds in the user's language (Thai, English, Japanese, etc.).
-* **Emergency Support:** Quick access to essential emotional support hotlines and medical emergency contacts.
-* **Chat History:** Conversations are securely stored in a MongoDB database.
-* **Resilient Backend:** Includes retry logic to handle AI server unavailability (Error 503) gracefully.
+* **เพื่อนคู่คิด AI:** พูดคุยกับ "เพื่อนใจ" ระบบ AI ที่ขับเคลื่อนด้วย Google Gemini ซึ่งถูกออกแบบมาให้เป็นผู้รับฟังที่ดี ให้คำแนะนำอย่างชาญฉลาด และไม่ตัดสินผู้ใช้งาน
+* **รองรับหลายภาษา:** ระบบ AI สามารถตรวจจับและตอบโต้ได้ตามภาษาที่ผู้ใช้งานพิมพ์ (ไทย, อังกฤษ, ญี่ปุ่น ฯลฯ)
+* **ช่วยเหลือฉุกเฉิน:** เข้าถึงเบอร์สายด่วนสุขภาพจิตและหน่วยงานแพทย์ฉุกเฉินได้อย่างรวดเร็ว
+* **ประวัติการสนทนา:** บทสนทนาทั้งหมดจะถูกบันทึกไว้อย่างปลอดภัยในฐานข้อมูล MongoDB
+* **ระบบ Backend ที่เสถียร:** มีระบบลองเชื่อมต่อใหม่ (Retry logic) เพื่อจัดการกรณีที่ AI Server ไม่ว่างหรือเกิดข้อผิดพลาด (Error 503) ได้อย่างราบรื่น
 
-## Tech Stack
+## เทคโนโลยีที่ใช้
 
 * **Frontend:** HTML5, CSS3, JavaScript (Vanilla)
 * **Backend:** Node.js (Native HTTP module)
 * **AI Model:** Google Gemini 1.5 Flash
 * **Database:** MongoDB Atlas
 * **Development Server:** Live-server
-
-## Installation
-
-### 1. Clone the repository
-
-```bash
-git clone [https://github.com/Peasx07/healjai2ja.git](https://github.com/Peasx07/healjai2ja.git)
-cd healjai2ja
